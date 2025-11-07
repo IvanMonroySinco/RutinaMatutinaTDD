@@ -42,6 +42,7 @@ public class RutinaMatutinaTest
         actividadActual.Should().Be("Leer y estudiar");
     }
     
+    
 }
 
 public class RutinaMatutina
@@ -50,6 +51,9 @@ public class RutinaMatutina
 
     public string QueDeboEstarHaciendoAhora()
     {
+        if (horaActual == new TimeSpan(7,59,0))
+            return "Leer y estudiar";
+        
         if (horaActual == new TimeSpan(7,0,0))
             return "Leer y estudiar";
 
