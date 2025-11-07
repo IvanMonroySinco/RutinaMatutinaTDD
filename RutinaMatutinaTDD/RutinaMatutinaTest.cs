@@ -19,29 +19,21 @@ public class RutinaMatutinaTest
 
         actividadActual.Should().Be("Hacer ejercicio");
     }
-
-    [Fact]
-    public void Dada_HoraActual7_00_Cuando_ConsultoQueDeboEstarHaciendo_Entonces_RetornarLeeryestudiar()
-    {
-        var rutinaMatutina = new RutinaMatutina();
-        rutinaMatutina.horaActual = new TimeSpan(7,0,0);
-
-        var actividadActual = rutinaMatutina.QueDeboEstarHaciendoAhora();
-
-        actividadActual.Should().Be("Leer y estudiar");
-    }
-
-    [Fact]
-    public void Dada_HoraActual7_59_Cuando_ConsultoQueDeboEstarHaciendo_Entonces_RetornarLeeryestudiar()
-    {
-        var rutinaMatutina = new RutinaMatutina();
-        rutinaMatutina.horaActual = new TimeSpan(7,59,0);
-
-        var actividadActual = rutinaMatutina.QueDeboEstarHaciendoAhora();
-
-        actividadActual.Should().Be("Leer y estudiar");
-    }
     
+    [Theory]
+    [InlineData(7,30,0)]
+    [InlineData(7,0,0)]
+    [InlineData(7,59,0)]
+    [InlineData(7,18,0)]
+    public void Dada_HoraActualEstaEntre7_00Y7_59_Cuando_ConsultoQueDeboEstarHaciendo_Entonces_RetornarLeeryestudiar(int horas, int minutos, int segundos)
+    {
+        var rutinaMatutina = new RutinaMatutina();
+        rutinaMatutina.horaActual = new TimeSpan(horas, minutos, segundos);
+
+        var actividadActual = rutinaMatutina.QueDeboEstarHaciendoAhora();
+
+        actividadActual.Should().Be("Leer y estudiar");
+    }
     
 }
 
@@ -51,10 +43,7 @@ public class RutinaMatutina
 
     public string QueDeboEstarHaciendoAhora()
     {
-        if (horaActual == new TimeSpan(7,59,0))
-            return "Leer y estudiar";
-        
-        if (horaActual == new TimeSpan(7,0,0))
+        if (horaActual >= new TimeSpan(7, 0, 0) && horaActual <= new TimeSpan(7, 59, 0))
             return "Leer y estudiar";
 
         if (horaActual >= new TimeSpan(6, 0, 0) && horaActual <= new TimeSpan(6, 59, 0))
