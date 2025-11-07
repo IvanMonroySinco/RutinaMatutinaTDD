@@ -45,13 +45,24 @@ public class RutinaMatutinaTest
 
         actividadActual.Should().Be("Desayunar");
     }
-
       
     [Fact]
     public void Dada_HoraActual8_59_Cuando_ConsultoQueDeboEstarHaciendo_Entonces_RetornarDesayunar()
     {
         var rutinaMatutina = new RutinaMatutina();
         rutinaMatutina.horaActual = new TimeSpan(8,59,0);
+
+        var actividadActual = rutinaMatutina.QueDeboEstarHaciendoAhora();
+
+        actividadActual.Should().Be("Desayunar");
+    }
+    
+    [Theory]
+    [InlineData(8,30,0)]
+    public void Dada_HoraActualEstaEntre8_00Y8_59_Cuando_ConsultoQueDeboEstarHaciendo_Entonces_RetornarDesayunar(int horas, int minutos, int segundos)
+    {
+        var rutinaMatutina = new RutinaMatutina();
+        rutinaMatutina.horaActual = new TimeSpan(horas,minutos,segundos);
 
         var actividadActual = rutinaMatutina.QueDeboEstarHaciendoAhora();
 
@@ -65,6 +76,8 @@ public class RutinaMatutina
 
     public string QueDeboEstarHaciendoAhora()
     {
+        
+        
         if (horaActual == new TimeSpan(8, 59, 0))
             return "Desayunar";
         
