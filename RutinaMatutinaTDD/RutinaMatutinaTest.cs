@@ -55,6 +55,9 @@ public class RutinaMatutina
 
     public string QueDeboEstarHaciendoAhora()
     {
+        if (horaActual == new TimeSpan(8, 0, 0))
+            return "Desayunar";
+        
         if (horaActual >= new TimeSpan(7, 0, 0) && horaActual <= new TimeSpan(7, 59, 0))
             return "Leer y estudiar";
 
