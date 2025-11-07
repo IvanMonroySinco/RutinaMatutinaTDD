@@ -22,12 +22,10 @@ public class RutinaMatutina
 {
     public TimeSpan horaActual;
 
-    public object QueDeboEstarHaciendoAhora()
+    public string QueDeboEstarHaciendoAhora()
     {
         if (horaActual == new TimeSpan(6, 0, 0))
-        {
             return "Hacer ejercicio";
-        }
 
         throw new NotImplementedException();
     }
